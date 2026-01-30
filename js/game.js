@@ -74,17 +74,32 @@ function loadQuestion() {
   });
 }
 
-function checkAnswer(i) {
-  if (i === shuffled[index].c) score++;
-  index++;
+function checkAnswer(selectedIndex) {
+  const buttons = document.querySelectorAll("#answers button");
+  const correctIndex = shuffled[index].c;
+
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correctIndex) {
+      btn.style.border = "2px solid #22c55e";
+      btn.style.background = "rgba(34,197,94,0.2)";
+    }
+    if (i === selectedIndex && i !== correctIndex) {
+      btn.style.border = "2px solid #ef4444";
+      btn.style.background = "rgba(239,68,68,0.2)";
+    }
+  });
+
+  if (selectedIndex === correctIndex) score++;
+
   document.getElementById("score").textContent = score;
-  if (score > best) {
-    best = score;
-    localStorage.bestScore = best;
-    document.getElementById("best").textContent = best;
-  }
-  loadQuestion();
+
+  setTimeout(() => {
+    index++;
+    loadQuestion();
+  }, 1000);
 }
+
 
 function endGame() {
   let level =
@@ -100,3 +115,4 @@ function endGame() {
 }
 
 loadQuestion();
+
