@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Security Write-Ups</title>
+<link rel="stylesheet" href="css/style.css">
+<script defer src="js/main.js"></script>
+</head>
+
+<body>
+<header class="navbar">
+  <h1>Security Write-Ups & Reports</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="writeups.html">Write-Ups</a>
+    <a href="game.html">Game</a>
+  </nav>
+</header>
+
+<section class="filters">
+  <button onclick="filterCards('all')">All</button>
+  <button onclick="filterCards('bug')">Bug Bounty</button>
+  <button onclick="filterCards('vapt')">VAPT</button>
+</section>
+
+<section class="cards">
+
+<div class="card bug">
+<h4>IDOR in Vehicle Booking System</h4>
+<p><strong>Severity:</strong> High</p>
+<p>Broken Object Level Authorization allowed access to other users’ data.</p>
+<button onclick="toggleDetails(this)">View Details</button>
+<div class="details">
+Changing the vehicle ID parameter exposed unauthorized booking information.
+</div>
+</div>
+
+<div class="card vapt">
+<h4>Admin Panel Exposure</h4>
+<p><strong>Severity:</strong> Critical</p>
+<p>Admin login page publicly accessible without IP restrictions.</p>
+<button onclick="toggleDetails(this)">View Details</button>
+<div class="details">
+Attackers could brute-force admin credentials leading to full compromise.
+</div>
+</div>
+
+</section>
+
+<footer>© 2026 Muhammed Fasal</footer>
+</body>
+</html>

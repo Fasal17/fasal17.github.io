@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammed Fasal | Cybersecurity Portfolio</title>
+<link rel="stylesheet" href="css/style.css">
+<script defer src="js/main.js"></script>
+</head>
+
+<body>
+<header class="navbar">
+  <h1>Muhammed Fasal</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="writeups.html">Write-Ups</a>
+    <a href="game.html">Game</a>
+    <button id="themeToggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Cybersecurity Researcher | VAPT Specialist | Bug Bounty Hunter | Trainer</h2>
+  <p>Securing applications through ethical hacking, awareness & automation.</p>
+
+  <div class="actions">
+    <a href="assets/Muhammed-Fasal-CV.pdf" download class="btn">Download CV</a>
+    <button class="btn" onclick="openCV()">Preview CV</button>
+  </div>
+</section>
+
+<section class="about">
+  <h3>About Me</h3>
+  <p>
+    I’m an enthusiastic cybersecurity professional focused on penetration testing,
+    vulnerability assessment, and bug bounty research. Active on Bugcrowd,
+    experienced with Burp Suite, Linux, and security automation.
+    Passionate about ethical hacking, training, and spreading security awareness.
+  </p>
+</section>
+
+<section class="skills">
+  <h3>Skills</h3>
+  <div class="grid">
+    <span>Penetration Testing</span>
+    <span>Web Application Security</span>
+    <span>Bug Bounty Research</span>
+    <span>OWASP Top 10</span>
+    <span>Network Security</span>
+    <span>Linux / Kali</span>
+    <span>Burp Suite</span>
+    <span>Nmap</span>
+    <span>Metasploit</span>
+  </div>
+</section>
+
+<section class="social">
+  <h3>Profiles</h3>
+  <a href="https://github.com/Fasal17" target="_blank">GitHub</a>
+  <a href="#" target="_blank">Bugcrowd</a>
+  <a href="#" target="_blank">HackerOne</a>
+  <a href="#" target="_blank">LinkedIn</a>
+</section>
+
+<!-- CV MODAL -->
+<div id="cvModal" class="modal" role="dialog" aria-label="CV Preview">
+  <div class="modal-content">
+    <button class="close" onclick="closeCV()">×</button>
+    <iframe src="assets/Muhammed-Fasal-CV.pdf"></iframe>
+  </div>
+</div>
+
+<footer>
+  © 2026 Muhammed Fasal — Cybersecurity Portfolio
+</footer>
+</body>
+</html>
