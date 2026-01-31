@@ -1,28 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Security Awareness Challenge</title>
-<link rel="stylesheet" href="css/style.css">
-<script defer src="js/game.js"></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security Awareness Challenge - Muhammed Fasal</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
-<header class="navbar">
-  <h1>Security Awareness Challenge</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="writeups.html">Write-Ups</a>
-    <a href="game.html">Game</a>
-  </nav>
-</header>
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="container">
+        <a href="index.html" class="logo">Muhammed Fasal</a>
+        <button class="theme-toggle" aria-label="Toggle Dark/Light Mode">🌙/☀️</button>
+        <button class="navbar-toggler" aria-label="Toggle navigation menu">☰</button>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="writeups.html">Write-Ups</a></li>
+          <li><a href="game.html">Security Game</a></li>
+        </ul>
+      </div>
+    </nav>
+    <section class="page-title">
+      <div class="container">
+        <h1>Security Awareness Challenge</h1>
+      </div>
+    </section>
+  </header>
 
-<section class="quiz">
-  <h3 id="question"></h3>
-  <div id="answers"></div>
-  <p>Score: <span id="score">0</span> | Best: <span id="best">0</span></p>
-</section>
+  <main>
+    <section class="game container">
+      <div id="quiz-container">
+        <div id="question-container" aria-live="polite">
+          <div id="question">Question text will go here</div>
+          <div id="answers">
+            <!-- Answer buttons inserted by JS -->
+          </div>
+        </div>
+        <div class="quiz-footer">
+          <button id="nextBtn" class="btn" disabled>Next</button>
+          <div id="score-board">
+            <span>Current Score: <strong id="current-score">0</strong></span>
+            <span>Best Score: <strong id="best-score">0</strong></span>
+          </div>
+        </div>
+      </div>
+      <div id="end-screen" hidden>
+        <h2>Your Final Score: <span id="final-score"></span></h2>
+        <p id="performance"></p>
+        <button id="restart-btn" class="btn">Restart Quiz</button>
+      </div>
+    </section>
+  </main>
 
-<footer>Learn. Secure. Repeat.</footer>
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
