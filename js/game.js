@@ -211,121 +211,98 @@ const questions = [
   }
 ];
 
-// Shuffle questions
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-shuffle(questions);
+// Shuffle
+questions.sort(() => Math.random() - 0.5);
 
-const questionEl = document.getElementById('question');
-const answersEl = document.getElementById('answers');
-const nextBtn = document.getElementById('nextBtn');
-const currentScoreEl = document.getElementById('current-score');
-const bestScoreEl = document.getElementById('best-score');
-const endScreen = document.getElementById('end-screen');
-const finalScoreEl = document.getElementById('final-score');
-const performanceEl = document.getElementById('performance');
-const restartBtn = document.getElementById('restart-btn');
-const quizContainer = document.getElementById('quiz-container');
+// DOM
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const nextBtn = document.getElementById("nextBtn");
+const scoreEl = document.getElementById("current-score");
+const bestEl = document.getElementById("best-score");
+const quiz = document.getElementById("quiz-container");
+const endScreen = document.getElementById("end-screen");
+const finalScore = document.getElementById("final-score");
+const performance = document.getElementById("performance");
+const restartBtn = document.getElementById("restart-btn");
 
-let currentQuestionIndex = 0;
+// State
+let index = 0;
 let score = 0;
-let bestScore = localStorage.getItem('bestScore') || 0;
-bestScoreEl.textContent = bestScore;
+let best = localStorage.getItem("bestScore") || 0;
+bestEl.textContent = best;
 
-// Load first question
+// Init
 loadQuestion();
 
 function loadQuestion() {
+  answersEl.innerHTML = "";
   nextBtn.disabled = true;
-  answersEl.innerHTML = '';
-  endScreen.hidden = true;
-  quizContainer.hidden = false;
 
-  if (currentQuestionIndex < questions.length) {
-    const currentQuestion = questions[currentQuestionIndex];
-    questionEl.textContent = currentQuestion.question;
-    currentQuestion.answers.forEach((answer, index) => {
-      const button = document.createElement('button');
-      button.textContent = answer;
-      button.classList.add('answer-btn');
-      button.setAttribute('data-index', index);
-      button.addEventListener('click', selectAnswer);
-      answersEl.appendChild(button);
-    });
-  } else {
-    // End of quiz
-    showEndScreen();
+  if (index >= questions.length) {
+    showEnd();
+    return;
   }
+
+  const q = questions[index];
+  questionEl.textContent = q.question;
+
+  q.answers.forEach((ans, i) => {
+    const btn = document.createElement("button");
+    btn.className = "answer-btn";
+    btn.textContent = ans;
+    btn.onclick = () => checkAnswer(i, q.correct);
+    answersEl.appendChild(btn);
+  });
 }
 
-function selectAnswer(e) {
-  const selectedBtn = e.target;
-  const answerIndex = selectedBtn.getAttribute('data-index');
-  const correctIndex = questions[currentQuestionIndex].correct;
-  if (answerIndex == correctIndex) {
+function checkAnswer(selected, correct) {
+  const buttons = document.querySelectorAll(".answer-btn");
+
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct) btn.classList.add("correct");
+    if (i === selected && i !== correct) btn.classList.add("wrong");
+  });
+
+  if (selected === correct) {
     score++;
-    currentScoreEl.textContent = score;
-    selectedBtn.classList.add('correct');
-  } else {
-    selectedBtn.classList.add('wrong');
-    // Highlight correct answer
-    Array.from(answersEl.children).forEach(button => {
-      if (button.getAttribute('data-index') == correctIndex) {
-        button.classList.add('correct');
-      }
-    });
+    scoreEl.textContent = score;
   }
-  Array.from(answersEl.children).forEach(button => button.disabled = true);
+
   nextBtn.disabled = false;
 }
 
-nextBtn.addEventListener('click', () => {
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    loadQuestion();
-  } else {
-    showEndScreen();
-  }
-});
-
-restartBtn.addEventListener('click', () => {
-  currentQuestionIndex = 0;
-  score = 0;
-  currentScoreEl.textContent = score;
-  shuffle(questions);
+nextBtn.onclick = () => {
+  index++;
   loadQuestion();
-});
+};
 
-function showEndScreen() {
-  quizContainer.hidden = true;
+function showEnd() {
+  quiz.hidden = true;
   endScreen.hidden = false;
-  finalScoreEl.textContent = score;
-  const total = questions.length;
-  const percentage = (score / total) * 100;
-  let level = 'Beginner';
-  if (percentage >= 80) {
-    level = 'Expert';
-  } else if (percentage >= 50) {
-    level = 'Intermediate';
-  }
-  performanceEl.textContent = `Security Awareness Level: ${level}`;
-  if (score > bestScore) {
-    bestScore = score;
-    localStorage.setItem('bestScore', bestScore);
-    bestScoreEl.textContent = bestScore;
+
+  finalScore.textContent = score;
+
+  const level =
+    score === questions.length ? "Expert 🔴" :
+    score >= 2 ? "Intermediate 🟡" :
+    "Beginner 🟢";
+
+  performance.textContent = level;
+
+  if (score > best) {
+    localStorage.setItem("bestScore", score);
+    bestEl.textContent = score;
   }
 }
 
-// On load, display stored best score
-document.addEventListener('DOMContentLoaded', () => {
-  const storedBest = localStorage.getItem('bestScore');
-  if (storedBest !== null) {
-    bestScore = storedBest;
-    bestScoreEl.textContent = bestScore;
-  }
-});
+restartBtn.onclick = () => {
+  index = 0;
+  score = 0;
+  scoreEl.textContent = 0;
+  endScreen.hidden = true;
+  quiz.hidden = false;
+  loadQuestion();
+};
 
