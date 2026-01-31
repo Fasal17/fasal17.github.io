@@ -302,7 +302,7 @@ restartBtn.addEventListener('click', () => {
 
 function showEndScreen() {
   quizContainer.hidden = true;
-  end-screen.hidden = false;
+  endScreen.hidden = false;
   finalScoreEl.textContent = score;
   const total = questions.length;
   const percentage = (score / total) * 100;
@@ -328,3 +328,4 @@ document.addEventListener('DOMContentLoaded', () => {
     bestScoreEl.textContent = bestScore;
   }
 });
+
