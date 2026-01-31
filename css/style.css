@@ -332,4 +332,35 @@ h2 {
   h2 {
     font-size: 1.5rem;
   }
+  /* ===== PROFILE LOGO IN NAVBAR ===== */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
 }
+
+.logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  box-shadow: 0 0 15px rgba(56,189,248,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(56,189,248,0.8);
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+  .logo-img {
+    width: 38px;
+    height: 38px;
+  }
+}
+}
+
