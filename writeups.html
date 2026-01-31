@@ -1,104 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Security Write-Ups</title>
-<link rel="stylesheet" href="css/style.css">
-<script defer src="js/main.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Write-Ups & Reports - Muhammed Fasal</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-<header class="navbar">
-  <h1>Security Write-Ups & Reports</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="writeups.html">Write-Ups</a>
-    <a href="game.html">Game</a>
-  </nav>
-</header>
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="container">
+        <a href="index.html" class="logo">Muahmmed Fasal</a>
+        <button class="theme-toggle" aria-label="Toggle Dark/Light Mode">🌙/☀️</button>
+        <button class="navbar-toggler" aria-label="Toggle navigation menu">☰</button>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="writeups.html">Write-Ups</a></li>
+          <li><a href="game.html">Security Game</a></li>
+        </ul>
+      </div>
+    </nav>
+    <section class="page-title">
+      <div class="container">
+        <h1>Security Write-Ups & Reports</h1>
+      </div>
+    </section>
+  </header>
 
-<section class="filters">
-  <button onclick="filterCards('all')">All</button>
-  <button onclick="filterCards('bug')">Bug Bounty</button>
-  <button onclick="filterCards('vapt')">VAPT</button>
-</section>
+  <main>
+    <section class="filters container">
+      <button class="filter-btn" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="bounty">Bug Bounty</button>
+      <button class="filter-btn" data-filter="vapt">VAPT</button>
+      <button class="filter-btn" data-filter="labs">Labs</button>
+    </section>
 
-<section class="cards">
+    <section class="writeups container">
+      <div class="card" data-category="bounty">
+        <h3>Cross-Site Scripting (XSS) Vulnerability</h3>
+        <p class="category">Vulnerability Type: Cross-Site Scripting (XSS)</p>
+        <p class="severity severity-low">Severity: Low</p>
+        <p class="description">An XSS issue found in the site's comment section. User-supplied input was not sanitized, allowing script injection.</p>
+        <button class="btn read-more" aria-expanded="false">Read More</button>
+        <div class="more-info" hidden>
+          <p><strong>Details:</strong> In the bug bounty program, I discovered that comment inputs were not escaped. By injecting a simple <code>&lt;script&gt;</code> alert command, I could execute arbitrary JavaScript. Steps to reproduce and remediation are documented in the full write-up.</p>
+        </div>
+      </div>
 
-<div class="card bug">
-<h4>IDOR in Vehicle Booking System</h4>
-<p><strong>Severity:</strong> High</p>
-<p>Broken Object Level Authorization allowed access to other users’ data.</p>
-<button onclick="toggleDetails(this)">View Details</button>
-<div class="details">
-Changing the vehicle ID parameter exposed unauthorized booking information.
-</div>
-</div>
+      <div class="card" data-category="vapt">
+        <h3>SQL Injection in Login Form</h3>
+        <p class="category">Vulnerability Type: SQL Injection</p>
+        <p class="severity severity-high">Severity: High</p>
+        <p class="description">The login form was vulnerable to SQL injection, allowing attackers to bypass authentication.</p>
+        <button class="btn read-more" aria-expanded="false">Read More</button>
+        <div class="more-info" hidden>
+          <p><strong>Details:</strong> During a penetration test, input fields were tested and found susceptible to SQL queries. I demonstrated access to the admin account by using classic SQL injection payloads. Detailed findings and fixes are in the report.</p>
+        </div>
+      </div>
 
-<div class="card vapt">
-<h4>Admin Panel Exposure</h4>
-<p><strong>Severity:</strong> Critical</p>
-<p>Admin login page publicly accessible without IP restrictions.</p>
-<button onclick="toggleDetails(this)">View Details</button>
-<div class="details">
-Attackers could brute-force admin credentials leading to full compromise.
-</div>
-</div>
+      <div class="card" data-category="labs">
+        <h3>Server Configuration Mistake</h3>
+        <p class="category">Vulnerability Type: Insecure Configuration</p>
+        <p class="severity severity-medium">Severity: Medium</p>
+        <p class="description">A misconfigured server allowed directory listing, exposing sensitive files.</p>
+        <button class="btn read-more" aria-expanded="false">Read More</button>
+        <div class="more-info" hidden>
+          <p><strong>Details:</strong> During a security lab, the web server was found listing directory contents due to a missing index page. I documented how this allowed access to backup files, and recommended disabling directory browsing.</p>
+        </div>
+      </div>
 
-  <!-- BUG BOUNTY -->
-<div class="card bug">
-  <h4>Reflected XSS in Search Endpoint</h4>
-  <p><strong>Severity:</strong> Medium</p>
-  <p>User input was reflected without proper encoding.</p>
-  <button onclick="toggleDetails(this)">View Details</button>
-  <div class="details">
-    The search parameter was directly reflected into HTML response,
-    allowing JavaScript execution. Could lead to session hijacking.
-    <br><br>
-    <strong>Fix:</strong> Output encoding + CSP.
-  </div>
-</div>
+      <!-- Add more write-up cards as needed -->
+    </section>
+  </main>
 
-<div class="card bug">
-  <h4>Account Enumeration via Password Reset</h4>
-  <p><strong>Severity:</strong> Low</p>
-  <p>Different responses for valid and invalid emails.</p>
-  <button onclick="toggleDetails(this)">View Details</button>
-  <div class="details">
-    Attackers could enumerate registered users.
-    <br><br>
-    <strong>Fix:</strong> Generic responses + rate limiting.
-  </div>
-</div>
-
-<!-- VAPT -->
-<div class="card vapt">
-  <h4>Improper Rate Limiting on Login</h4>
-  <p><strong>Severity:</strong> High</p>
-  <p>No lockout or CAPTCHA after failed attempts.</p>
-  <button onclick="toggleDetails(this)">View Details</button>
-  <div class="details">
-    Brute-force attacks possible on authentication endpoint.
-    <br><br>
-    <strong>Fix:</strong> Rate limiting + account lockout.
-  </div>
-</div>
-
-<div class="card vapt">
-  <h4>Sensitive Information Disclosure</h4>
-  <p><strong>Severity:</strong> Medium</p>
-  <p>Stack traces revealed internal paths.</p>
-  <button onclick="toggleDetails(this)">View Details</button>
-  <div class="details">
-    Error messages exposed server paths and framework versions.
-    <br><br>
-    <strong>Fix:</strong> Disable debug mode in production.
-  </div>
-</div>
-
-</section>
-
-<footer>© 2026 Muhammed Fasal</footer>
+  <script src="js/main.js"></script>
 </body>
 </html>
-
