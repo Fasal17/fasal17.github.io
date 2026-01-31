@@ -1,3 +1,5 @@
+console.log("GAME.JS LOADED ✅");
+
 // Security Awareness Quiz Game
 const questions = [
   {
@@ -305,4 +307,5 @@ restartBtn.onclick = () => {
   quiz.hidden = false;
   loadQuestion();
 };
+
 
